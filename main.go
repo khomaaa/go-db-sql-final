@@ -142,8 +142,12 @@ func main() {
 	// попытка удаления отправленной посылки
 	err = service.Delete(p.Number)
 	if err != nil {
-		fmt.Println(err)
-		return
+		if err.Error() == "the parcel is not registered or does not exist" {
+			fmt.Println(err)
+		} else {
+			fmt.Println(err)
+			return
+		}
 	}
 
 	// вывод посылок клиента
